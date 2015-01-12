@@ -19,7 +19,8 @@ This software is provided under the license specified in LICENSE.
 static libusb_context *ctx;
 
 void print_usage() {
-    printf("Usage: ykush [-l] {-d|-u} {downstream_number|a}\n");
+    printf("Usage:\n ykush2 [-l]\n");
+    printf(" ykush2 [-h hub] {-d|-u} {port|a}\n");
 }
 
 

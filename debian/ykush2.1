@@ -4,7 +4,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH YKUSH SECTION "January  6, 2015"
+.TH YKUSH2 1 "January  12, 2015"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -18,39 +18,39 @@
 .\" .sp <n>    insert n+1 empty lines
 .\" for manpage-specific macros, see man(7)
 .SH NAME
-ykush \- program to do something
+ykush2 \- program to control the Yepkit YKUSH USB switchable hub
 .SH SYNOPSIS
-.B ykush
-.RI [ options ] " files" ...
-.br
-.B bar
-.RI [ options ] " files" ...
+.nf
+.BR ykush2 " -l"
+.BR ykush2 " [-h \fIHUB\fP] {-d|-u} \fIPORT\fP"
+.fi
 .SH DESCRIPTION
 This manual page documents briefly the
-.B ykush
-and
-.B bar
-commands.
+.B ykush2
+command.
 .PP
 .\" TeX users may be more comfortable with the \fB<whatever>\fP and
 .\" \fI<whatever>\fP escape sequences to invode bold face and italics,
 .\" respectively.
-\fBykush\fP is a program that...
+\fBykush2\fP is a program that allows one to control the Yepkit YKUSH USB switchable hub.
+It can be used to enumerate hubs connected to a system and to switch on or off USB ports.
 .SH OPTIONS
-These programs follow the usual GNU command line syntax, with long
-options starting with two dashes (`-').
-A summary of options is included below.
-For a complete description, see the Info files.
 .TP
-.B \-h, \-\-help
-Show summary of options.
+.B \-l
+List available YKUSH USB hubs.
 .TP
-.B \-v, \-\-version
-Show version of program.
-.SH SEE ALSO
-.BR bar (1),
-.BR baz (1).
-.br
-The programs are documented fully by
-.IR "The Rise and Fall of a Fooish Bar" ,
-available via the Info system.
+.B \-d ", " \-u \fIPORT\fP
+Switch a specific port up or down. Specify port
+.B 1
+, 
+.B 2
+, 
+.B 3
+or
+.B a
+to switch all ports.
+.TP
+.B \-h \fIHUB\fP
+Select the hub to control. The number can be obtained using the
+.B \-l
+option.

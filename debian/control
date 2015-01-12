@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: Moritz Hoffmann <antiguru+deb@gmail.com>
 Build-Depends: debhelper (>= 9), libusb-1.0-0-dev
 Standards-Version: 3.9.6
-Homepage: https://www.yepkit.com/products/ykush
 Vcs-Git: https://github.com/antiguru/ykush.git
 Vcs-Browser: https://github.com/antiguru/ykush
 

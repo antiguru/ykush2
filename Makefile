@@ -11,7 +11,7 @@ EXECUTABLE=ykush2
 INSTALL=/usr/bin/install
 
 all: $(EXECUTABLE)
-$(EXECUTABLE): 
+$(EXECUTABLE): $(SOURCES) $(DEPS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(SOURCES) -o $@
 	
 .PHONY: clean

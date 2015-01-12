@@ -27,3 +27,10 @@
 *.i*86
 *.x86_64
 *.hex
+
+ykush2
+debian/ykush2
+debian/ykush2.debhelper.log
+debian/ykush2.postinst.debhelper
+debian/ykush2.preinst.debhelper
+debian/ykush2.substvars

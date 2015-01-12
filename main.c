@@ -178,6 +178,16 @@ int main(int argc, char** argv) {
             fprintf(stderr, "%s.)\n", libusb_strerror(err));
             goto out_dev;
         }
+        err = libusb_interrupt_transfer(hub, YKUSH_ENDPOINT_INT_IN, buf,
+            sizeof(buf), &transferred, TIMEOUT);
+        if (err < 0) {
+            fprintf(stderr, "Failed to receive response: %s (", libusb_error_name(err));
+            fprintf(stderr, "%s.)\n", libusb_strerror(err));
+            goto out_dev;
+        }
+        if (transferred < sizeof(buf)) {
+            fprintf(stderr, "Short read from device.\n");
+        }
     }
 
     out_dev:

@@ -1,0 +1,17 @@
+Source: ykush2
+Section: utils
+Priority: optional
+Maintainer: Moritz Hoffmann <antiguru+deb@gmail.com>
+Build-Depends: debhelper (>= 9), libusb-1.0-0-dev
+Standards-Version: 3.9.6
+Homepage: https://www.yepkit.com/products/ykush
+Vcs-Git: https://github.com/antiguru/ykush.git
+Vcs-Browser: https://github.com/antiguru/ykush
+
+Package: ykush2
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Program to control the YKUSH Yepkit USB Switchable Hub
+ This program can be used to control the Yepkit YKUSH USB Switchable Hub. In
+ contrast to the original program, it supports several hubs and allows one to
+ list them.

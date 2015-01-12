@@ -1,0 +1,12 @@
+#ifndef _USBCOM_H
+#define _USBCOM_H
+
+#define YKUSH_USB_VENDOR_ID    0x04D8
+#define YKUSH_USB_PRODUCT_ID   0x0042
+#define YKUSH_ENDPOINT_INT_IN  0x81
+#define YKUSH_ENDPOINT_INT_OUT 0x01
+
+#define YKUSH_ALL_PORTS 0x0a
+#define YKUSH_PORTS 3
+
+#endif /* _USBCOM_H */

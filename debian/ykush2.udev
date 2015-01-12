@@ -1,0 +1,6 @@
+# udev rules for Yepkit Ykush power switching USB hub
+ACTION!="add|change", GOTO="ykush2_end"
+
+SUBSYSTEM=="usb", ATTR{manufacturer}=="Yepkit Lda.", ATTR{product}=="YKUSH", GROUP="plugdev"
+
+LABEL="ykush2_end"

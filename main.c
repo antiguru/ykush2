@@ -149,21 +149,18 @@ int main(int argc, char** argv) {
         
         err = libusb_detach_kernel_driver(hub, 0);
         if (err < 0 && err != LIBUSB_ERROR_NOT_FOUND) {
-            fprintf(stderr, "Failed to detach kernel: %s (", libusb_error_name(err));
-            fprintf(stderr, "%s.)\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to detach kernel: %s\n", libusb_error_name(err));
             goto out_dev;
         }
         err = libusb_set_configuration(hub, 1);
         if (err < 0) {
-            fprintf(stderr, "Failed to set configuration: %s (", libusb_error_name(err));
-            fprintf(stderr, "%s.)\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to set configuration: %s\n", libusb_error_name(err));
             goto out_dev;
         }
     
         err = libusb_claim_interface(hub, 0);
         if (err < 0) {
-            fprintf(stderr, "Failed to claim interface: %s (", libusb_error_name(err));
-            fprintf(stderr, "%s.)\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to claim interface: %s\n", libusb_error_name(err));
             goto out_dev;
         }
         
@@ -174,15 +171,13 @@ int main(int argc, char** argv) {
         err = libusb_interrupt_transfer(hub, YKUSH_ENDPOINT_INT_OUT, buf,
             sizeof(buf), &transferred, TIMEOUT);
         if (err < 0) {
-            fprintf(stderr, "Failed to send command: %s (", libusb_error_name(err));
-            fprintf(stderr, "%s.)\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to send command: %s\n", libusb_error_name(err));
             goto out_dev;
         }
         err = libusb_interrupt_transfer(hub, YKUSH_ENDPOINT_INT_IN, buf,
             sizeof(buf), &transferred, TIMEOUT);
         if (err < 0) {
-            fprintf(stderr, "Failed to receive response: %s (", libusb_error_name(err));
-            fprintf(stderr, "%s.)\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to receive response: %s\n", libusb_error_name(err));
             goto out_dev;
         }
         if (transferred < sizeof(buf)) {

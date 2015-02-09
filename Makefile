@@ -1,4 +1,4 @@
-DESTDIR?=/  
+DESTDIR?=/ 
 INSTALL_LOCATION=$(DESTDIR)/usr/
 CFLAGS+= -std=c99
 LDFLAGS+= -lusb-1.0

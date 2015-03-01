@@ -12,7 +12,7 @@ INSTALL=/usr/bin/install
 
 all: $(EXECUTABLE)
 $(EXECUTABLE): $(SOURCES) $(DEPS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(SOURCES) -o $@
+	$(CC) $(CFLAGS) $(SOURCES) $(LDFLAGS) -o $@
 	
 .PHONY: clean
 

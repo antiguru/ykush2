@@ -34,7 +34,7 @@ enum action {
  */
 int main(int argc, char** argv) {
     int option;
-    int port;
+    int port= 0;
     int hub_id = 1;
     int err;
     enum action action = YKUSH_NONE;

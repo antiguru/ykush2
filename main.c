@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 
     err = libusb_init(&ctx);
     if (err < 0) {
-        fprintf(stderr, "Failed to initialize USB: %s\n", libusb_strerror(err));
+        fprintf(stderr, "Failed to initialize USB: %s\n", libusb_error_name(err));
         err = EXIT_FAILURE;
         goto cleanup;
     }
@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
     libusb_device **list = NULL;
     ssize_t size = libusb_get_device_list(ctx, &list);
     if (size < 0) {
-        fprintf(stderr, "Failed to enumerate devices: %s\n", libusb_strerror(err));
+        fprintf(stderr, "Failed to enumerate devices: %s\n", libusb_error_name(err));
         err = EXIT_FAILURE;
         goto cleanup;
     }
@@ -108,7 +108,7 @@ int main(int argc, char** argv) {
         struct libusb_device_descriptor desc;
         err = libusb_get_device_descriptor(list[i], &desc);
         if (err < 0) {
-            fprintf(stderr, "Failed to enumerate devices: %s\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to enumerate devices: %s\n", libusb_error_name(err));
             err = EXIT_FAILURE;
             goto cleanup;
         }
@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
                 printf("%i: %04x:%04x ", devices, desc.idVendor, desc.idProduct);
                 err = libusb_open(list[i], &hub);
                 if (err < 0) {
-                    fprintf(stderr, "Unable to open device: %s\n", libusb_strerror(err));
+                    fprintf(stderr, "Unable to open device: %s\n", libusb_error_name(err));
                 } else {
                     hub_open = true;
                     unsigned char serial[64];
@@ -127,19 +127,19 @@ int main(int argc, char** argv) {
                     unsigned char manufacturer[64];
                     err = libusb_get_string_descriptor_ascii(hub, desc.iSerialNumber, serial, sizeof(serial));
                     if (err < 0) {
-                        fprintf(stderr, "Unable to query device: %s\n", libusb_strerror(err));
+                        fprintf(stderr, "Unable to query device: %s\n", libusb_error_name(err));
                         err = EXIT_FAILURE;
                         goto cleanup;
                     }
                     err = libusb_get_string_descriptor_ascii(hub, desc.iProduct, product, sizeof(product));
                     if (err < 0) {
-                        fprintf(stderr, "Unable to query device: %s\n", libusb_strerror(err));
+                        fprintf(stderr, "Unable to query device: %s\n", libusb_error_name(err));
                         err = EXIT_FAILURE;
                         goto cleanup;
                     }
                     err = libusb_get_string_descriptor_ascii(hub, desc.iManufacturer, manufacturer, sizeof(manufacturer));
                     if (err < 0) {
-                        fprintf(stderr, "Unable to query device: %s\n", libusb_strerror(err));
+                        fprintf(stderr, "Unable to query device: %s\n", libusb_error_name(err));
                         err = EXIT_FAILURE;
                         goto cleanup;
                     }
@@ -152,7 +152,7 @@ int main(int argc, char** argv) {
             } else if (devices == hub_id) {
                 err = libusb_open(list[i], &hub);
                 if (err < 0) {
-                    fprintf(stderr, "Failed to open device: %s\n", libusb_strerror(err));
+                    fprintf(stderr, "Failed to open device: %s\n", libusb_error_name(err));
                     err = EXIT_FAILURE;
                     goto cleanup;
                 }
@@ -170,21 +170,21 @@ int main(int argc, char** argv) {
         
         err = libusb_detach_kernel_driver(hub, 0);
         if (err < 0 && err != LIBUSB_ERROR_NOT_FOUND) {
-            fprintf(stderr, "Failed to detach kernel: %s\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to detach kernel: %s\n", libusb_error_name(err));
             err = EXIT_FAILURE;
             goto cleanup;
         }
 
         err = libusb_set_configuration(hub, 1);
         if (err < 0) {
-            fprintf(stderr, "Failed to set configuration: %s\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to set configuration: %s\n", libusb_error_name(err));
             err = EXIT_FAILURE;
             goto cleanup;
         }
     
         err = libusb_claim_interface(hub, 0);
         if (err < 0) {
-            fprintf(stderr, "Failed to claim interface: %s\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to claim interface: %s\n", libusb_error_name(err));
             err = EXIT_FAILURE;
             goto cleanup;
         }
@@ -198,14 +198,14 @@ int main(int argc, char** argv) {
         err = libusb_interrupt_transfer(hub, YKUSH_ENDPOINT_INT_OUT, buf,
             sizeof(buf), &transferred, TIMEOUT);
         if (err < 0) {
-            fprintf(stderr, "Failed to send command: %s\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to send command: %s\n", libusb_error_name(err));
             err = EXIT_FAILURE;
             goto cleanup;
         }
         err = libusb_interrupt_transfer(hub, YKUSH_ENDPOINT_INT_IN, buf,
             sizeof(buf), &transferred, TIMEOUT);
         if (err < 0) {
-            fprintf(stderr, "Failed to receive response: %s\n", libusb_strerror(err));
+            fprintf(stderr, "Failed to receive response: %s\n", libusb_error_name(err));
             err = EXIT_FAILURE;
             goto cleanup;
         }
